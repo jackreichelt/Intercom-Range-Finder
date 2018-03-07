@@ -16,6 +16,7 @@ def load_data(filename):
         if REQUIRED_KEYS.issubset(set(parsed_line)):
             customer_data.append(parsed_line)
         else:
+            f.close()
             raise KeyError(f'The file {filename} has bad data.')
 
     f.close()

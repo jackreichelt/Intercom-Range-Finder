@@ -1,5 +1,5 @@
 import json
-    
+
 def loadData(filename):
     try:
         f = open(filename)

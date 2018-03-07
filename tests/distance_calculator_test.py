@@ -9,9 +9,10 @@ OFFICE = {'latitude': 53.339428, 'longitude': -6.257664}  # Intercom location
 class TestDistanceMethods(unittest.TestCase):
 
     def test_same_position(self):
-        self.assertEqual(angle_between_points(OFFICE, OFFICE), 0)
+        # assertAlmostEqual is used here to account for floating point issues.
+        self.assertAlmostEqual(angle_between_points(OFFICE, OFFICE), 0)
         # Shouldn't pass if the previous failed.
-        self.assertEqual(great_circle_distance(OFFICE), 0)
+        self.assertAlmostEqual(great_circle_distance(OFFICE), 0)
 
     def test_nearby_position(self):
         # The centre of St Stephen's Green. approx 200m.
@@ -40,6 +41,18 @@ class TestDistanceMethods(unittest.TestCase):
             }
         self.assertGreater(great_circle_distance(zero), 5900)
         self.assertLess(great_circle_distance(zero), 6000)
+
+    def test_bad_data(self):
+        bad_lat = {
+            'latitude': 'hello',
+            'longitude': '0'
+            }
+        bad_long = {
+            'latitude': '0',
+            'longitude': 'goodbye'
+            }
+        self.assertRaises(ValueError, great_circle_distance, bad_lat)
+        self.assertRaises(ValueError, great_circle_distance, bad_long)
 
 
 if __name__ == '__main__':

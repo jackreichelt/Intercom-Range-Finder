@@ -6,10 +6,13 @@ OFFICE = {'latitude': 53.339428, 'longitude': -6.257664}  # Intercom location
 
 # Returns the angle between two points on the earth.
 def angle_between_points(point_a, point_b):
-    phi1 = radians(point_a['latitude'])
-    phi2 = radians(float(point_b['latitude']))
-    lam1 = radians(point_a['longitude'])
-    lam2 = radians(float(point_b['longitude']))
+    try:
+        phi1 = radians(float(point_a['latitude']))
+        phi2 = radians(float(point_b['latitude']))
+        lam1 = radians(float(point_a['longitude']))
+        lam2 = radians(float(point_b['longitude']))
+    except ValueError as e:
+        raise ValueError(e)
 
     longitude_difference = abs(lam1 - lam2)
 

@@ -6,7 +6,7 @@ This project requires no libraries. It requires Python 3, and is built for 3.6.
 
 ## Running
 To run the project:
-`python3 rangeFinder.py`
+`python3 range_finder.py`
 
 ## Tests
 To run the tests:
